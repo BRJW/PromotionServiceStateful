@@ -36,7 +36,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
-func addUser(w http.ResponseWriter, r *http.Request){
+func addUser(w http.ResponseWriter, r *http.Request) {
 	userId := strconv.Itoa(id)
 	id++
 
@@ -67,9 +67,7 @@ func addUser(w http.ResponseWriter, r *http.Request){
 
 	users[userId] = inputUser
 
-	fmt.Fprintln(w,userId)
-
-
+	fmt.Fprintln(w, userId)
 
 }
 
@@ -77,12 +75,14 @@ func getPromotions(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	userId := vars["userId"]
 
+	/* We don't need this, just some fun with mock services..
 	res, err := http.Get("http://mockserviceapr28121747amfromfraudservice7136-8080-default.mock.blazemeter.com/Fraud/" + userId)
 	log.Println(res.StatusCode)
 	if err != nil || res.StatusCode != 200 {
 		http.Error(w, "Fraud Service didn't respond", 402)
 		return
 	}
+	*/
 
 	inputUser, exists := users[userId]
 	if !exists {
